@@ -6,7 +6,9 @@
 #include <vector>
 
 template <typename T>
+
 class PriorityQueue {
+
 private:
     std::vector<T> data;
 
