@@ -54,16 +54,22 @@ int main(void)
 	// Create and compile our GLSL program from the shaders
 	GLuint programID = LoadShaders("Simple.vs", "Simple.fs");
 
-
+	//Set Vertexes
 	static const GLfloat g_vertex_buffer_data[] = {
-		-1.0f, -0.5f, 0.0f,
-		1.0f, -1.0f, 0.0f,
+		-1.0f, -0.8f, 0.0f,
+		1.0f, -0.8f, 0.0f,
 		0.0f, 1.0f, 0.0f,
+		1.0f, 1.0f, 0.0f,
 	};
 
+	//Create an open slot in memory to do something with
 	GLuint vertexbuffer;
+	//Create a Buffer, make it so looking for the var vertexbuffer will find it
 	glGenBuffers(1, &vertexbuffer);
+	//Specify the type of buffer we want this vertexbuffer buffer to be
+		//GL_ARRAY_BUFFER is used for vertex array stuff
 	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+
 	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
 
 	do {
@@ -87,6 +93,7 @@ int main(void)
 			);
 
 		// Draw the triangle !
+		//Using 3 vertices starting at 0, draw a triangle
 		glDrawArrays(GL_TRIANGLES, 0, 3); // 3 indices starting at 0 -> 1 triangle
 
 		glDisableVertexAttribArray(0);
@@ -108,4 +115,13 @@ int main(void)
 	glfwTerminate();
 
 	return 0;
+
+	if (sf::Keyboard::iskeyPressed(sf::Keyboard::Escape))
+		m_bRunning = false;
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1)) m_v3Color = glm::vec3(1.0f, 0.0f, 0.0f);
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num2)) m_v3Color = glm::vec3(0.0f, 1.0f, 0.0f);
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num3)) m_v3Color = glm::vec3(0.0f, 0.0f, 1.0f);
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Nume)) m_v3Color = glm::vec3(-1.0f, 1.0f, 1.0f);
+	if (a_event.key.code == sf::Keyboard::Key::C)
+		m_bComplimentary Im_bComplimentary;
 }
